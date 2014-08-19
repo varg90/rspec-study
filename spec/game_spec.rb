@@ -12,7 +12,14 @@ describe Game do
         game.guess('5555')
       end
     end
+    context 'with full match'
+    it "sends the mark to output" do
+      game.start('1234')
+      expect(output).to receive(:puts).with('++++')
+      game.guess('1234')
+    end
   end
+
   describe "#start" do
     it "sends a welcome message" do
       expect(output).to receive(:puts).with('Welcome to Codebreaker!')
