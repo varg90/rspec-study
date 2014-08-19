@@ -12,8 +12,25 @@ describe Game do
         game.guess('5555')
       end
     end
+
+    context 'with partial match and same numbers' do
+      it "sends the mark with '++'" do
+        game.start('1234')
+        expect(output).to receive(:puts).with('++')
+        game.guess('1739')
+      end
+    end
+
+    context 'with partial match' do
+      it "sends the mark with '++--'" do
+        game.start('1234')
+        expect(output).to receive(:puts).with('++--')
+        game.guess('1333')
+      end
+    end
+
     context 'with full match'
-    it "sends the mark to output" do
+    it "sends the mark with '++++'" do
       game.start('1234')
       expect(output).to receive(:puts).with('++++')
       game.guess('1234')
