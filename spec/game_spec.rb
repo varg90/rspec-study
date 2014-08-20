@@ -5,9 +5,11 @@ describe Game do
   let(:output) { double('output').as_null_object }
   let(:game) { Game.new(output) }
   describe "#guess" do
+    before(:each) do
+      game.start('1234')
+    end
     context "with no matches" do
       it "sends a mark with ''" do
-        game.start('1234')
         expect(output).to receive(:puts).with('')
         game.guess('5555')
       end
@@ -15,7 +17,6 @@ describe Game do
 
     context 'with partial match and same numbers' do
       it "sends the mark with '++'" do
-        game.start('1234')
         expect(output).to receive(:puts).with('++')
         game.guess('1739')
       end
@@ -23,7 +24,6 @@ describe Game do
 
     context 'with partial match' do
       it "sends the mark with '++--'" do
-        game.start('1234')
         expect(output).to receive(:puts).with('++--')
         game.guess('1333')
       end
@@ -31,7 +31,6 @@ describe Game do
 
     context 'with full match'
     it "sends the mark with '++++'" do
-      game.start('1234')
       expect(output).to receive(:puts).with('++++')
       game.guess('1234')
     end
